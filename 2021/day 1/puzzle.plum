@@ -1,0 +1,2 @@
+
+file("input").readlines :> int :: with_last(0) :> last, next => last > next :> sum -> print
