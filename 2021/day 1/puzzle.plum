@@ -1,2 +1,15 @@
 
-file("input").readlines :> int :: with_last(0) :> last, next => last > next :> sum -> print
+file("input").readlines() 
+    :> int 
+    :: window(2) 
+    :> [last, next] => next > last 
+    :: sum 
+    -> print
+
+file("input").readlines()
+    :> int
+    :: window(4)
+    :> w => w:0 < w:3
+    :: sum
+    -> print
+
