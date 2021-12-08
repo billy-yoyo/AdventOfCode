@@ -1,0 +1,19 @@
+
+vectors = file("input").readlines()
+    :> line => { 
+        list(line.strip())
+            :> int 
+            :> (x => if (x == 0) -1 else 1) 
+            := _ 
+    }
+    :> vec
+
+totals = vectors :: sum :+
+
+totals :> { x => if (x <= 0) 0 else 1 } := gamma
+totals :> { x => if (x <= 0) 1 else 0 } := epsilon
+
+print(read_bits(gamma) * read_bits(epsilon))
+
+ox_vectors = vectors
+for i in range((ox_vectors:0).dimension)
