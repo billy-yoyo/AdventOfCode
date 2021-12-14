@@ -1,5 +1,7 @@
 from collections import defaultdict
+import time
 
+start_time = time.time()
 with open("testinput") as f:
     input = f.read()
 
@@ -30,16 +32,13 @@ totals = defaultdict(int)
 for c in start:
     totals[c] += 1
 
-print(len(start))
-print("---")
 for i in range(1, len(start)):
-    print(i)
     compute_element_pair(start[i-1], start[i], totals, 40)
-
-print(totals)
 
 mini = min(totals.values())
 maxi = max(totals.values())
 
 print(maxi - mini)
 
+end_time = time.time()
+print(f"Took {end_time - start_time} seconds")
