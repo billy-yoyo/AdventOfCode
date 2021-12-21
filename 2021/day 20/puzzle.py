@@ -21,7 +21,7 @@ def encode(x, y, default):
     return algo[int(chars, 2)]
 
 def tick(count):
-    default = "." if count % 2 == 0 else "#"
+    default = "."# if count % 2 == 0 else "#"
     new_image = {}
     positions = set([k for k, v in image.items() if v == "#"])
     for x, y in list(positions):
