@@ -1,3 +1,5 @@
+from functools import cache
+import time
 
 p = [3, 7]
 d = [0, 0]
@@ -54,10 +56,12 @@ def count_wins(p1, p2, s1, s2, turn):
                 tw2 += w2
             yield (tw1 * freq, tw2 * freq)
 
+start_time = time.time()
 tw1, tw2 = 0, 0
 for w1, w2 in count_wins(5, 9, 0, 0, 0):
     tw1 += w1
     tw2 += w2
+print(f"tookn {time.time() - start_time} seconds")
 
 print(tw1, tw2)
 print(min(tw1, tw2))
