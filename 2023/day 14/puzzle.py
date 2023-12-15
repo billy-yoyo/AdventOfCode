@@ -1,4 +1,5 @@
 import functools
+import time
 
 NORTH = 0
 EAST = 1
@@ -68,6 +69,7 @@ def cycle(rows):
     return rows
 
 
+start = time.time()
 with open("input") as f:
     rows = f.read().strip().split("\n")
     initial_rows = rows
@@ -105,3 +107,5 @@ with open("input") as f:
     print(count_north_load(rows))
 
 
+end = time.time()
+print(f"took {end - start}")
