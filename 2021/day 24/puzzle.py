@@ -1,5 +1,4 @@
-
-env = {}
+from collections import defaultdict
 
 commands = {}
 
@@ -9,52 +8,58 @@ def command(name):
         return func
     return decorator
 
-def val(x):
+def val(env, x):
     try:
         return int(x)
     except:
         return env[x]
 
 @command("inp")
-def inp(a):
-    env[a] = next(inputs)
+def inp(env, a):
+    env[a] = next(env["inputs"])
 
 @command("add")
-def add(a, b):
-    env[a] += val(b)
+def add(env, a, b):
+    env[a] += val(env, b)
 
 @command("mul")
-def mul(a, b):
-    env[a] *= val(b)
+def mul(env, a, b):
+    env[a] *= val(env, b)
 
 @command("div")
-def div(a, b):
-    env[a] //= val(b)
+def div(env, a, b):
+    env[a] //= val(env, b)
 
 @command("mod")
-def mod(a, b):
-    env[a] %= val(b)
+def mod(env, a, b):
+    env[a] %= val(env, b)
 
 @command("eql")
-def eql(a, b):
-    if env[a] == val(b):
+def eql(env, a, b):
+    if env[a] == val(env, b):
         env[a] = 1
     else:
         env[a] = 0
 
-def run(cmd):
+def run(env, cmd):
     executor = commands[cmd[0]]
-    executor(*cmd[1:])
+    executor(env, *cmd[1:])
 
-def run_all(cmds):
+def run_all(env, cmds):
     for cmd in cmds:
-        run(cmd)
+        run(env, cmd)
 
+def execute_for_input(cmds, input):
+    env = {
+        "w": 0, "x": 0, "y": 0, "z": 0,
+        "inputs": iter([int(x) for x in input])
+    }
+    run_all(env, cmds)
+    return env["z"]
 
 inputs = iter([int(x) for x in "13579246899999"])
 
 with open("testinput") as f:
     cmds = [x.strip().split(" ") for x in f]
 
-run_all(cmds)
-print(env)
+print(execute_for_input(cmds, "12934998949199"))
