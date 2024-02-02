@@ -232,6 +232,7 @@ def playout_with_checks(initial_state, movement_stack):
 
 
 def state_search(initial_state, starting_index=0, index_step=1, upper_bound=-1):
+    visited = set()
     state = initial_state
     min_cost = upper_bound
     best_path = None
@@ -253,7 +254,7 @@ def state_search(initial_state, starting_index=0, index_step=1, upper_bound=-1):
         finished = state_finished(state)
 
         # no valid moves, roll back state
-        if len(valid_moves) <= index or finished or (min_cost >= 0 and total_cost >= min_cost):
+        if state in visited or len(valid_moves) <= index or finished or (min_cost >= 0 and total_cost >= min_cost):
             if not finished and len(movement_stack) == 0:
                 break
             else:
@@ -274,6 +275,7 @@ def state_search(initial_state, starting_index=0, index_step=1, upper_bound=-1):
                 else:
                     index += 1
         else:
+            visited |= {state}
             if not movement_stack:
                 print(f"{index} of {len(valid_moves)}")
             start, end, cost = valid_moves[index]
