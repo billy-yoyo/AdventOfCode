@@ -35,5 +35,5 @@ while swaps > 0:
     swaps = single_round()
 
 print(input_list)
-print(total_swaps)
+print((total_swaps // 2) + len(input_list)) # program 1 always does one more round
 
