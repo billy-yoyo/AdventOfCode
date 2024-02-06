@@ -1,0 +1,48 @@
+a = 1
+b = 81
+c = b
+
+
+b = 108100
+c = 125100
+
+// how many numbers, between b and c, with interval 17, are not prime?
+while true {
+    f = 1
+    d = 2
+
+    g = 1
+    // for d in range(2, b + 1)
+    //     for e in range(2, b + 1)
+    //         if (d * e) == b: f == 0
+    while g != 0 {
+        e = 2
+
+        // e in range(2, b + 1)
+        //     if (d * e) == b: f = 0
+        while g != 0 {
+            g = (d * e) - b
+            if g == 0 {
+                f = 0
+            }
+            e += 1
+            g = e - b
+        }
+
+        d += 1
+        g = d - b
+    }
+
+    // if b is not prime, h += 1
+    if f == 0 {
+        h += 1
+    }
+
+    // if b == c, break
+    g = b - c
+    if g == 0 {
+        break
+    }
+    b += 17
+}
+
