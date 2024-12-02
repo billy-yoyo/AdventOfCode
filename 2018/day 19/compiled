@@ -1,0 +1,27 @@
+
+func init(d, b) {
+    d += 2
+    d = (d * d * 19 * 11) + ((b + 5) * 22) + 2
+
+    d += ((27 * 28) + 29) * 30 * 14 * 32
+    main(d)
+}
+
+func main(d) {
+    f = 1
+    a = 0
+    while f <= d {
+        c = 1
+        while c <= d {
+            c = 1
+            b = f * c
+            if b == d {
+                a += f
+            }
+            c += 1
+        }
+
+        f += 1
+    }
+    return a
+}
