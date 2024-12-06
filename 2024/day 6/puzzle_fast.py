@@ -54,17 +54,11 @@ def get_full_path():
   x, y = sx, sy
 
   visited = set()
-  visited_with_dir = set()
   dindex = directions.index(direction_map[rows[y][x]])
 
   step = 0
   while True:
     visited.add((x, y))
-
-    if (x, y, dindex) in visited_with_dir:
-      return None
-
-    visited_with_dir.add((x, y, dindex))
 
     dx, dy = directions[dindex]
     x, y = x + dx, y + dy
