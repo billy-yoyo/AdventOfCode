@@ -1,0 +1,53 @@
+
+p = 0
+i = 31
+a = 1
+
+// AKA a = 2 ** 31
+while i > 0 {
+    a *= 2
+    a -= 1
+}
+
+a -= 1
+i = 127
+p = 622
+while i > 0 {
+    p = (p * 8505) % a
+    p = ((p * 129749) + 12345) % a
+    b = p % 10000
+
+    send(b)
+    i -= 1
+}
+
+while a > 0 {
+    b = 1
+    while b > 0 {
+        b = receive()
+    }
+
+    f = 1
+    while f > 0 {
+        f = 0
+        i = 126
+        a = receive()
+
+        while i > 0 {
+            b = receive()
+
+            p = b - a
+            if p > 0 {
+                send(b)
+                f = 1
+                i -= 1
+            } else {
+                send(a)
+                a = b
+                i -= 1
+            }
+        }
+
+        send(a)
+    }
+}

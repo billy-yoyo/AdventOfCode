@@ -1,0 +1,27 @@
+
+
+file("input").readlines() 
+    :> line => line.split(" ")
+    :> [dir, amt] => [dir, int(amt)]
+    :> [dir, amt] => {
+        if (dir == "forward") vec(amt, 0) 
+        elif (dir == "down") vec(0, amt)
+        elif (dir == "up") vec(0, -amt)
+        else vec(0, 0)
+    }
+    :: sum
+    :> x, y => x * y
+    -> print
+
+file("input").readlines() 
+    :> line => line.split(" ")
+    :> [dir, amt] => [dir, int(amt)]
+    :> [dir, amt] => {
+        if (dir == "forward") vec(amt, amt, 0) 
+        elif (dir == "down") vec(0, 0, amt)
+        elif (dir == "up") vec(0, 0, -amt)
+        else vec(0, 0)
+    }
+    :: reduce((0, 0, 0), { cur, total => (cur[0] + total[0], (cur[1] * total[2]) + total[1], cur[2] + total[2]) })
+    :> x, y => x * y
+    -> print

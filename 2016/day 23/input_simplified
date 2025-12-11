@@ -1,0 +1,44 @@
+
+
+while I < X - 1 {
+    b = X - I
+    d = X
+    a = 0
+    c = X - I
+
+    // AKA a = (d * c)
+    while d != 0 {
+        while c != 0 {
+            a += 1
+            c -= 1
+        }
+        d -= 1
+    }
+
+    b -= 1 // b = X - I
+    c = b
+    d = b
+
+    // AKA c = b * 2
+    while d != 0 {
+        d -= 1
+        c += 1
+    }
+}
+c = 96
+
+// AKA a += 95 * 96
+while c != 0 {
+    d = 95
+    // AKA a += 95
+    while d != 0 {
+        a += 1
+        d -= 1
+    }
+    c -= 1
+}
+
+
+// so a = (X * X - 1)
+
+

@@ -1,0 +1,33 @@
+
+file("input").readlines()
+    :> line => { 
+        list(line.strip())
+            :> int 
+            :> (x => if (x == 0) -1 else 1) 
+            := _ 
+    }
+    :> vec 
+    := vectors
+
+totals = vectors :: sum :+
+
+totals :> { x => if (x <= 0) 0 else 1 } := gamma
+totals :> { x => if (x <= 0) 1 else 0 } := epsilon
+
+print(read_bits(gamma) * read_bits(epsilon))
+
+ox_vector = range(vectors[0].dimension) :: reduce(vectors, { (index, vectors) => {
+    bit = if ((vectors :: sum :+)[i] < 0) -1 else 1
+    vectors :: filter(v => v[i] == bit) := _
+} }) :+
+
+print(ox_vector)
+
+ox_vectors = vectors
+for i in range((ox_vectors[0]).dimension) {
+    ox_total = ox_vectors :: sum :+
+    bit = if (ox_total[i] <= 0) -1 else 1 
+    ox_vectors :: filter(v => v[i] == bit) := ox_vectors
+}
+
+print(len(ox_vectors))
